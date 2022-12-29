@@ -70,7 +70,7 @@ module SolarTerms24
       File.open("#{CACHE_DIR}/#{@year}.json", 'w') do |f|
         json = data.dup
         json.each_key do |key|
-          json[key] = json[key].strftime('%Y-%m-%d %H:%M:S.%L%Z')
+          json[key] = json[key].strftime('%Y-%m-%d %H:%M:%S.%L%Z')
         end
         f.write(JSON.dump(json))
       end

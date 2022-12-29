@@ -34,14 +34,15 @@ module SolarTerms24
 
     class << self
       def find_solar_terms_times(year)
-        whole_year_data = fetch_ecliptic_longitudes(Date.new(year), Date.new(year + 1), step: '1 hour')
+        whole_year_data = fetch_ecliptic_longitudes(Date.new(year, 1, 5), Date.new(year, 12, 23), step: '1 hour')
         whole_year_data.sort_by! { |d| d[:longitude] }
 
-        term_ranges = SOLAR_TERMS.keys.each_with_object({}) do |key, h|
+        SOLAR_TERMS.keys.each_with_object({}) do |key, h|
           range = range_index(whole_year_data, SOLAR_TERMS[key][:longitude])
           range = [whole_year_data[range[0]], whole_year_data[range[1]]]
-          ratio = (SOLAR_TERMS[key][:longitude] - range[0][:longitude]) / range[1][:longitude] - range[0][:longitude]
-          base_time = DateTime.parse(term_ranges[key][0][:time])
+          # interpolate the time
+          ratio = (SOLAR_TERMS[key][:longitude] - range[0][:longitude]) / (range[1][:longitude] - range[0][:longitude])
+          base_time = DateTime.parse(range[0][:time])
           h[key] = base_time + 1/24r * ratio.to_r
         end
       end
