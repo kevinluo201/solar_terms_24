@@ -19,7 +19,7 @@ module SolarTerms24
         if cached_file?(year)
           load_cached_file(year)
         else
-          tmp = SolarTerms24::Horizons.find_solar_terms_time(year)
+          tmp = SolarTerms24::Horizons.find_solar_terms_times(year)
           save_to_cache(tmp)
           tmp
         end

@@ -6,7 +6,6 @@ module SolarTerms24
   module Horizons
     TIME_FORMAT = '%Y-%m-%d %H:%M:%S.%L'
     SOLAR_TERMS = {
-      winter_solstice: { month: 12, days: 21..23, longitude: 270 },
       minor_cold: { month: 1, days: 5..7, longitude: 285 },
       major_cold: { month: 1, days: 19..21, longitude: 300 },
       start_of_spring: { month: 2, days: 3..5, longitude: 315 },
@@ -29,56 +28,48 @@ module SolarTerms24
       frost: { month: 10, days: 22..24, longitude: 210 },
       start_of_winter: { month: 11, days: 7..9, longitude: 225 },
       minor_snow: { month: 11, days: 21..23, longitude: 240 },
-      major_snow: { month: 12, days: 6..8, longitude: 255 }
+      major_snow: { month: 12, days: 6..8, longitude: 255 },
+      winter_solstice: { month: 12, days: 21..23, longitude: 270 }
     }.freeze
 
     class << self
-      def find_solar_terms_time(year)
-        puts year
-        SOLAR_TERMS.keys.each_with_object({}) do |key, h|
-          time = calculate_solar_term_time(year, SOLAR_TERMS[key])
-          puts "#{key}: #{time.strftime("%Y-%m-%d %H:%M")}"
-          h[key] = time
+      def find_solar_terms_times(year)
+        whole_year_data = fetch_ecliptic_longitudes(Date.new(year), Date.new(year + 1), step: '1 hour')
+        whole_year_data.sort_by! { |d| d[:longitude] }
+
+        term_ranges = SOLAR_TERMS.keys.each_with_object({}) do |key, h|
+          range = range_index(whole_year_data, SOLAR_TERMS[key][:longitude])
+          range = [whole_year_data[range[0]], whole_year_data[range[1]]]
+          ratio = (SOLAR_TERMS[key][:longitude] - range[0][:longitude]) / range[1][:longitude] - range[0][:longitude]
+          base_time = DateTime.parse(term_ranges[key][0][:time])
+          h[key] = base_time + 1/24r * ratio.to_r
         end
       end
 
-      def calculate_solar_term_time(year, solar_term)
-        start_date = Date.new(year, solar_term[:month], solar_term[:days].first)
-        end_date = Date.new(year, solar_term[:month], solar_term[:days].last + 1)
-        horizons_data = search_hourly(start_date, end_date)
-        solar_term_hour = time_range(horizons_data, solar_term[:longitude])
-        horizons_data = search_minutely(solar_term_hour, solar_term_hour + 1/24r)
-        time_range(horizons_data, solar_term[:longitude])
+      def range_index(data, longitude)
+        return [data.size - 1, 0] if longitude.zero?
+
+        index = data.bsearch_index { |d| d[:longitude] >= longitude }
+        [index - 1, index]
       end
 
-      def search_hourly(start_time, end_time)
-        ecliptic_longitudes_from_horizons(start_time, end_time, step_size: '1 hour')
-      end
-
-      def search_minutely(start_time, end_time)
-        ecliptic_longitudes_from_horizons(start_time, end_time, step_size: '1 minute')
-      end
-
-      def time_range(data, longitude)
-        index = data.bsearch_index { |d| d[1] >= longitude || d[1] < 1 }
-        data[index - 1][0]
-      end
-
-      def ecliptic_longitudes_from_horizons(start_time, end_time, step_size:)
+      def fetch_ecliptic_longitudes(start_time, end_time, step:)
         response = Faraday.get('https://ssd.jpl.nasa.gov/api/horizons.api', {
                                  format: 'text',
                                  COMMAND: '10',
                                  QUANTITIES: '31',
                                  START_TIME: "'#{start_time.strftime(TIME_FORMAT)}'",
                                  STOP_TIME: "'#{end_time.strftime(TIME_FORMAT)}'",
-                                 STEP_SIZE: "'#{step_size}'"
+                                 STEP_SIZE: "'#{step}'"
                                })
         lines = response.body.split("\n")
         lines[lines.index('$$SOE') + 1..lines.index('$$EOE') - 1].map do |line|
-          row = line.split('   ').map(&:strip)
-          row[0] = DateTime.parse(row[0])
-          row[1] = row[1].to_f
-          row
+          # regex matches the time and ecliptic longitude
+          matches = line.match(/(\d+-\w+-\d{2} \d{2}:\d{2}|\d+-\w+-\d{2} \d{2}:\d{2}:\d{2}\.\d{3})\s+([\d\.]+)/)
+          {
+            time: matches[1],
+            longitude: matches[2].to_f
+          }
         end
       end
     end
