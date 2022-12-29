@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'faraday'
 
 module SolarTerms24::Horizons
@@ -33,11 +34,10 @@ module SolarTerms24::Horizons
   class << self
     def find_solar_terms_time(year)
       puts year
-      SOLAR_TERMS.keys.reduce({}) do |h, key|
+      SOLAR_TERMS.keys.each_with_object({}) do |key, h|
         time = calculate_solar_term_time(year, SOLAR_TERMS[key])
         puts "#{key}: #{time.strftime("%Y-%m-%d %H:%M")}"
         h[key] = time
-        h
       end
     end
 
@@ -65,16 +65,16 @@ module SolarTerms24::Horizons
 
     def ecliptic_longitudes_from_horizons(start_time, end_time, step_size:)
       response = Faraday.get('https://ssd.jpl.nasa.gov/api/horizons.api', {
-        format: 'text',
-        COMMAND: '10',
-        QUANTITIES: '31',
-        START_TIME: "'#{start_time.strftime(TIME_FORMAT)}'",
-        STOP_TIME: "'#{end_time.strftime(TIME_FORMAT)}'",
-        STEP_SIZE: "'#{step_size}'"
-      })
+                               format: 'text',
+                               COMMAND: '10',
+                               QUANTITIES: '31',
+                               START_TIME: "'#{start_time.strftime(TIME_FORMAT)}'",
+                               STOP_TIME: "'#{end_time.strftime(TIME_FORMAT)}'",
+                               STEP_SIZE: "'#{step_size}'"
+                             })
       lines = response.body.split("\n")
-      lines[lines.index("$$SOE") + 1..lines.index("$$EOE") - 1].map do |line|
-        row = line.split("   ").map(&:strip)
+      lines[lines.index('$$SOE') + 1..lines.index('$$EOE') - 1].map do |line|
+        row = line.split('   ').map(&:strip)
         row[0] = DateTime.parse(row[0])
         row[1] = row[1].to_f
         row

@@ -18,7 +18,7 @@ RSpec.describe SolarTerms24::SolarTerm do
   end
 
   describe '#datetime' do
-    let(:time) { DateTime.new(2023, 12, 21, 23)}
+    let(:time) { DateTime.new(2023, 12, 21, 23) }
     let(:solar_term) { described_class.new(:winter_solstice, time) }
 
     it 'returns the datetime of the solar term' do
@@ -32,7 +32,7 @@ RSpec.describe SolarTerms24::SolarTerm do
   end
 
   describe '#date' do
-    let(:time) { DateTime.new(2023, 12, 21, 23)}
+    let(:time) { DateTime.new(2023, 12, 21, 23) }
     let(:solar_term) { described_class.new(:winter_solstice, time) }
 
     it 'returns the date of the solar term' do

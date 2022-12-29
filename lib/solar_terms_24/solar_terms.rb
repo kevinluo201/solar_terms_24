@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'tzinfo'
 require 'json'
 
@@ -22,14 +23,13 @@ class SolarTerms24::SolarTerms
         tmp
       end
 
-    @solar_terms = data.each_key.reduce({}) do |h, key|
+    @solar_terms = data.each_key.each_with_object({}) do |key, h|
       h[key.to_sym] = SolarTerms24::SolarTerm.new(key.to_sym, data[key], timezone: timezone, lang: lang)
-      h
     end
   end
 
   ::SolarTerms24::Horizons::SOLAR_TERMS.each_key do |key|
-    define_method(key) { instance_variable_get("@solar_terms")[key] }
+    define_method(key) { instance_variable_get('@solar_terms')[key] }
   end
 
   def change_timezone(timezone)
