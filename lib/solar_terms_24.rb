@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+require_relative 'solar_terms_24/version'
+require_relative 'solar_terms_24/horizons'
+require_relative 'solar_terms_24/solar_term'
+require_relative 'solar_terms_24/solar_terms'
+
+module SolarTerms24
+  class Error < StandardError; end
+end
