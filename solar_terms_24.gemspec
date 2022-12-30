@@ -5,11 +5,11 @@ require_relative 'lib/solar_terms_24/version'
 Gem::Specification.new do |spec|
   spec.name = 'solar_terms_24'
   spec.version = SolarTerms24::VERSION
-  spec.authors = ['Kevin Luo']
+  spec.authors = ['kevinluo201']
   spec.email = ['kevin.luo@hey.com']
 
-  spec.summary = 'solar_terms_24 is a gem that provides the 24 solar terms.'
-  spec.description = 'It uses JPL Horizons System to fetch the timeIt provides the 24 solar terms in Chinese, English, and Japanese.'
+  spec.summary = '`solar_terms_24` calculates and collects 24 solar terms each year.'
+  spec.description = "It uses JPL Horizons System API to calculate the accurate solar terms' times and can translate them into different timezones and languages."
   spec.homepage = 'https://github.com/kevinluo201/solar_terms_24'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.4.0'
