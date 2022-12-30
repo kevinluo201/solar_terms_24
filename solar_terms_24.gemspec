@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday', '~> 2.0'
   spec.add_dependency 'i18n', '~> 1.0'
   spec.add_dependency 'tzinfo', '~> 2.0.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'debug', '~> 1.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 1.21'
