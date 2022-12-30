@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['kevinluo201']
   spec.email = ['kevin.luo@hey.com']
 
-  spec.summary = '`solar_terms_24` calculates and collects 24 solar terms each year.'
+  spec.summary = '`solar_terms_24` calculates and collects 24 solar terms each year by using NASA JPL Horizons System API.'
   spec.description = "It uses JPL Horizons System API to calculate the accurate solar terms' times and can translate them into different timezones and languages."
   spec.homepage = 'https://github.com/kevinluo201/solar_terms_24'
   spec.license = 'MIT'

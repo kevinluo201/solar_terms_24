@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    solar_terms_24 (1.0.0)
+    solar_terms_24 (1.0.1)
       faraday (~> 2.0)
       i18n (~> 1.0)
       thor (~> 1.0)
@@ -78,4 +78,4 @@ DEPENDENCIES
   solar_terms_24!
 
 BUNDLED WITH
-   2.3.7
+   2.4.1
