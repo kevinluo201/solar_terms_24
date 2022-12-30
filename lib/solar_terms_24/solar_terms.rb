@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 require 'tzinfo'
-require 'json'
 
 module SolarTerms24
   class SolarTerms
-    CACHE_DIR = File.expand_path(File.join(__dir__, 'db'))
-
     attr_accessor :year, :timezone, :lang
     attr_reader :solar_terms
 
@@ -15,14 +12,12 @@ module SolarTerms24
       @timezone = timezone
       @lang = lang
 
-      data =
-        if cached_file?(year)
-          load_cached_file(year)
-        else
-          tmp = SolarTerms24::Horizons.find_solar_terms_times(year)
-          save_to_cache(tmp)
-          tmp
-        end
+      if SolarTerms24::Cache.has?(year)
+        data = SolarTerms24::Cache.load(year)
+      else
+        data = SolarTerms24::Horizons.find_solar_terms_times(year)
+        SolarTerms24::Cache.save(year, data)
+      end
 
       @solar_terms = data.each_key.each_with_object({}) do |key, h|
         h[key.to_sym] = SolarTerms24::SolarTerm.new(key.to_sym, data[key], timezone: timezone, lang: lang)
@@ -49,31 +44,6 @@ module SolarTerms24
 
     def dates
       @solar_terms.map { |_, v| v.date }.sort
-    end
-
-    private
-
-    def cached_file?(year)
-      File.exist?("#{CACHE_DIR}/#{year}.json")
-    end
-
-    def load_cached_file(year)
-      file = File.read("#{CACHE_DIR}/#{year}.json")
-      json = JSON.parse(file)
-      json.each_key do |key|
-        json[key] = DateTime.parse(json[key])
-      end
-      json
-    end
-
-    def save_to_cache(data)
-      File.open("#{CACHE_DIR}/#{@year}.json", 'w') do |f|
-        json = data.dup
-        json.each_key do |key|
-          json[key] = json[key].strftime('%Y-%m-%d %H:%M:%S.%L%Z')
-        end
-        f.write(JSON.dump(json))
-      end
     end
   end
 end
