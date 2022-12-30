@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/solar_terms_24.svg)](https://badge.fury.io/rb/solar_terms_24)
+[![Ruby](https://github.com/kevinluo201/solar_terms_24/actions/workflows/main.yml/badge.svg)](https://github.com/kevinluo201/solar_terms_24/actions/workflows/main.yml)
 # SolarTerms24
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/solar_terms_24`. To experiment with that code, run `bin/console` for an interactive prompt.
