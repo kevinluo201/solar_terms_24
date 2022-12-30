@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'solar_terms_24'
+
+SolarTerms24::Cli.start(ARGV)
