@@ -5,6 +5,7 @@ require 'json'
 module SolarTerms24
   # :nodoc:
   class Cache
+    TIME_FORMAT = '%Y-%m-%d %H:%M:%S.%L%:z'
     CACHE_DIR = File.expand_path(File.join(__dir__, 'db'))
 
     def self.has?(year)
@@ -24,7 +25,7 @@ module SolarTerms24
       File.open("#{CACHE_DIR}/#{year}.json", 'w') do |f|
         json = data.dup
         json.each_key do |key|
-          json[key] = json[key].strftime('%Y-%m-%d %H:%M:%S.%L%Z')
+          json[key] = json[key].strftime(TIME_FORMAT)
         end
         f.write(JSON.pretty_generate(json))
       end

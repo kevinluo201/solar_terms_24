@@ -62,4 +62,36 @@ RSpec.describe SolarTerms24::SolarTerm do
       expect(solar_term.name).to eq('啓蟄')
     end
   end
+
+  describe '#to_json' do
+    let(:solar_term) { described_class.new(:awakening_of_insects, DateTime.new(2022, 1, 2, 16)) }
+
+    it 'returns the json of the solar term' do
+      expect(solar_term.to_json).to eq(
+        {
+          'date' => '2022-01-02',
+          'datetime' => '2022-01-02 15:00:00.000+00:00',
+          'lang' => 'en',
+          'name' => 'Awakening Of Insects',
+          'solar_term_key' => 'awakening_of_insects',
+          'timezone' => 'UTC'
+        }
+      )
+    end
+
+    it 'language and timezone will be adapted' do
+      solar_term.lang = 'zh-TW'
+      solar_term.timezone = 'Asia/Taipei'
+      expect(JSON.parse(solar_term.to_json)).to eq(
+        {
+          'date' => '2022-01-03',
+          'datetime' => '2022-01-03 00:00:00.000+08:00',
+          'lang' => 'zh-TW',
+          'name' => '驚蟄',
+          'solar_term_key' => 'awakening_of_insects',
+          'timezone' => 'Asia/Taipei'
+        }
+      )
+    end
+  end
 end

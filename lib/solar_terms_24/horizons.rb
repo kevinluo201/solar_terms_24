@@ -42,7 +42,10 @@ module SolarTerms24
           range = range_index(whole_year_data, SOLAR_TERMS[key][:longitude])
           range = [whole_year_data[range[0]], whole_year_data[range[1]]]
           # interpolate the time
-          ratio = (SOLAR_TERMS[key][:longitude] - range[0][:longitude]) / (range[1][:longitude] - range[0][:longitude])
+          longitude_diff = range[1][:longitude] - range[0][:longitude]
+          longitude_diff += 360 if longitude_diff.negative?
+          target_longitude = SOLAR_TERMS[key][:longitude].zero? ? 360 : SOLAR_TERMS[key][:longitude]
+          ratio = (target_longitude - range[0][:longitude]) / longitude_diff
           base_time = DateTime.parse(range[0][:time])
           h[key] = base_time + 1/24r * ratio.to_r
         end

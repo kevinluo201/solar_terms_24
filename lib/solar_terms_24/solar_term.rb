@@ -2,6 +2,7 @@
 
 require 'i18n'
 require 'tzinfo'
+require 'json'
 
 I18n.load_path += Dir["#{File.dirname(__FILE__)}/locales/*.yml"]
 
@@ -30,6 +31,21 @@ module SolarTerms24
     def name
       I18n.locale = @lang
       I18n.t(@solar_term_key)
+    end
+
+    def as_json
+      {
+        date: date.strftime('%Y-%m-%d'),
+        datetime: datetime.strftime(SolarTerms24::Cache::TIME_FORMAT),
+        lang: @lang,
+        name: name,
+        solar_term_key: @solar_term_key,
+        timezone: @timezone
+      }
+    end
+
+    def to_json(*_args)
+      JSON.pretty_generate(as_json)
     end
   end
 end
