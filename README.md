@@ -6,7 +6,7 @@
 
 `solar_terms_24` calculates and collects 24 solar terms each year. It utilizes [NASA's JPL Horizons System API](https://ssd.jpl.nasa.gov/horizons/) to calculate the longitude of ecliptic data. Those solar terms’ times can be translated into different **timezone** or **languages**.
 
-[Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) Solar terms play an important role in calendars. For example, for lunisolar calendars like Chinese calendar, it is used to decide the [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping)). In addition, let’s see the definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox, the **spring equinox** is also a solar term so it can also be used to decide Easter day.
+[Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) play an important role in calendars. For example, for lunisolar calendars like Chinese calendar, it is used to decide the [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping)). In addition, let’s see the definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox, the **spring equinox** is also a solar term so it can also be used to decide Easter day.
 
 This gem aims to solve 2 main problems while finding those solar terms times of each year:
 
@@ -98,7 +98,7 @@ $ solar_terms_24 list 2022 --timezone=Asia/Taipei  --lang=zh-TW
 # 冬至: 2022-12-22 05:48
 ```
 ### In code
-You can use `SolarTerms24::SolarTerms` to grab solar terms information of a year.
+You can use `SolarTerms24::SolarTerms` to grab solar terms information of a year, then access one solar term by `solar_terms.solar_terms[:winter_solstice]` or `solar_terms.winter_solstice`.
 ```ruby
 year = 2022
 solar_terms = SolarTerms24::SolarTerms.new(year)
@@ -122,6 +122,34 @@ solar_term.date.strftime('%Y-%m-%d')
 # => 2022-12-22
 solar_term.datetime.strftime('%Y-%m-%d %H:%M:%S')
 # => "2022-12-22 05:48:14"
+```
+24 solar terms methods are:
+```ruby
+solar_terms = SolarTerms24::SolarTerms.new(year)
+solar_terms.minor_cold
+solar_terms.major_cold
+solar_terms.start_of_spring
+solar_terms.spring_showers
+solar_terms.awakening_of_insects
+solar_terms.spring_equinox
+solar_terms.pure_brightness
+solar_terms.grain_rain
+solar_terms.start_of_summer
+solar_terms.grain_buds
+solar_terms.grain_in_ear
+solar_terms.summer_solstice
+solar_terms.minor_heat
+solar_terms.major_heat
+solar_terms.start_of_autumn
+solar_terms.end_of_heat
+solar_terms.white_dew
+solar_terms.autumn_equinox
+solar_terms.cold_dew
+solar_terms.frost
+solar_terms.start_of_winter
+solar_terms.minor_snow
+solar_terms.major_snow
+solar_terms.winter_solstice
 ```
 
 ## Options
