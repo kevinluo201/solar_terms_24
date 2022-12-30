@@ -6,7 +6,7 @@
 
 `solar_terms_24` calculates and collects 24 solar terms each year. It utilizes [NASA's JPL Horizons System API](https://ssd.jpl.nasa.gov/horizons/) to calculate the longitude of ecliptic data. Those solar terms’ times can be translated into different **timezone** or **languages**.
 
-[Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) is any of twenty-four periods in traditional Chinese lunisolar calendars and still used by many East-Asia countries. The solar terms are also used to calculate [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping)).
+[Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) Solar terms play an important role in calendars. For example, for lunisolar calendars like Chinese calendar, it is used to decide the [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping)). In addition, let’s see the definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox, the **spring equinox** is also a solar term so it can also be used to decide Easter day.
 
 This gem aims to solve 2 main problems while finding those solar terms times of each year:
 
