@@ -123,11 +123,14 @@ solar_term.datetime.strftime('%Y-%m-%d %H:%M:%S')
 ## Options
 ### Languages
 
-These are the languages supported:
+These are the supported languages:
 
-* en (default)
-* ja
-* zh-TW
+* en (English, default)
+* ja (Japanese)
+* ko (Korean)
+* vi (Vietnamese)
+* zh-CN (Simpified Chinese)
+* zh-TW (Tranditional Chinese)
 
 ### Timezone
 

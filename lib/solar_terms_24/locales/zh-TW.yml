@@ -1,5 +1,4 @@
 zh-TW:
-  winter_solstice: 冬至
   minor_cold: 小寒
   major_cold: 大寒
   start_of_spring: 立春
@@ -23,3 +22,4 @@ zh-TW:
   start_of_winter: 立冬
   minor_snow: 小雪
   major_snow: 大雪
+  winter_solstice: 冬至
