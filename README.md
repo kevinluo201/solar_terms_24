@@ -98,7 +98,7 @@ $ solar_terms_24 list 2022 --timezone=Asia/Taipei  --lang=zh-TW
 # 冬至: 2022-12-22 05:48
 ```
 ### In code
-
+You can use `SolarTerms24::SolarTerms` to grab solar terms information of a year.
 ```ruby
 year = 2022
 solar_terms = SolarTerms24::SolarTerms.new(year)
@@ -111,7 +111,9 @@ solar_term.date.strftime('%Y-%m-%d')
 solar_term.datetime.strftime('%Y-%m-%d %H:%M:%S')
 # => 2022-12-21 21:48:14
 # => solar_term.datetime is a DateTime object
-
+```
+To specify different timezones and languages, for example, `Asia/Taipei` and `zh-TW`
+```ruby
 solar_terms = SolarTerms24::SolarTerms.new(year, timezone: 'Asia/Taipei', lang: 'zh-TW')
 solar_term = solar_terms.winter_solstice
 solar_term.name
@@ -136,7 +138,7 @@ These are the supported languages:
 
 ### Timezone
 
-It uses the gem [tzinfo], so all timezones in [IANA Time Zone Database](http://www.iana.org/time-zones) are supported. For example,
+It uses the gem [tzinfo](https://github.com/tzinfo/tzinfo), so all timezones in [IANA Time Zone Database](http://www.iana.org/time-zones) are supported. For example,
   * UTC (default)
   * Asia/Ho_Chi_Minh
   * Asia/Seoul
