@@ -21,3 +21,6 @@ Metrics/BlockLength:
 
 Metrics/AbcSize:
   Enabled: false
+
+Lint/ToJSON:
+  Enabled: false

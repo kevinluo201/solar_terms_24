@@ -47,14 +47,12 @@ module SolarTerms24
       @solar_terms.map { |_, v| v.date }.sort
     end
 
-    def to_json(*_args)
+    def to_json
       JSON.pretty_generate(
         year: @year,
         timezone: @timezone,
         lang: @lang,
-        solar_terms: @solar_terms.each_with_object({}) do |(k, v), h|
-          h[k] = v.as_json
-        end
+        solar_terms: @solar_terms.transform_values(&:as_json)
       )
     end
   end

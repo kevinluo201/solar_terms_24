@@ -44,7 +44,7 @@ module SolarTerms24
       }
     end
 
-    def to_json(*_args)
+    def to_json
       JSON.pretty_generate(as_json)
     end
   end
