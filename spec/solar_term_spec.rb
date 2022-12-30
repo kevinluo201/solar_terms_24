@@ -67,10 +67,10 @@ RSpec.describe SolarTerms24::SolarTerm do
     let(:solar_term) { described_class.new(:awakening_of_insects, DateTime.new(2022, 1, 2, 16)) }
 
     it 'returns the json of the solar term' do
-      expect(solar_term.to_json).to eq(
+      expect(JSON.parse(solar_term.to_json)).to eq(
         {
           'date' => '2022-01-02',
-          'datetime' => '2022-01-02 15:00:00.000+00:00',
+          'datetime' => '2022-01-02 16:00:00.000+00:00',
           'lang' => 'en',
           'name' => 'Awakening Of Insects',
           'solar_term_key' => 'awakening_of_insects',

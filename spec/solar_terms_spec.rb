@@ -106,7 +106,7 @@ RSpec.describe SolarTerms24::SolarTerms do
       expect(solar_terms.awakening_of_insects.time.strftime('%Y-%m-%d %H:%M:%S')).to eq('2022-03-05 14:43:46')
       expect(solar_terms.spring_equinox.is_a?(SolarTerms24::SolarTerm)).to be_truthy
       expect(solar_terms.spring_equinox.solar_term_key).to eq(:spring_equinox)
-      expect(solar_terms.spring_equinox.time.strftime('%Y-%m-%d %H:%M:%S')).to eq('2022-03-20 16:00:00')
+      expect(solar_terms.spring_equinox.time.strftime('%Y-%m-%d %H:%M:%S')).to eq('2022-03-20 15:33:26')
       expect(solar_terms.pure_brightness.is_a?(SolarTerms24::SolarTerm)).to be_truthy
       expect(solar_terms.pure_brightness.solar_term_key).to eq(:pure_brightness)
       expect(solar_terms.pure_brightness.time.strftime('%Y-%m-%d %H:%M:%S')).to eq('2022-04-04 19:20:15')
