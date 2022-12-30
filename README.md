@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/solar_terms_24.svg)](https://badge.fury.io/rb/solar_terms_24)
+[![Ruby](https://github.com/kevinluo201/solar_terms_24/actions/workflows/main.yml/badge.svg)](https://github.com/kevinluo201/solar_terms_24/actions/workflows/main.yml)
 # SolarTerms24
 
 ## Introduction
