@@ -3,6 +3,7 @@
 require 'json'
 
 module SolarTerms24
+  # :nodoc:
   class Cache
     CACHE_DIR = File.expand_path(File.join(__dir__, 'db'))
 

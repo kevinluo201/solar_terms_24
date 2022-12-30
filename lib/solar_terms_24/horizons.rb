@@ -3,6 +3,7 @@
 require 'faraday'
 
 module SolarTerms24
+  # :nodoc:
   module Horizons
     TIME_FORMAT = '%Y-%m-%d %H:%M:%S.%L'
     SOLAR_TERMS = {
@@ -66,7 +67,7 @@ module SolarTerms24
         lines = response.body.split("\n")
         lines[lines.index('$$SOE') + 1..lines.index('$$EOE') - 1].map do |line|
           # regex matches the time and ecliptic longitude
-          matches = line.match(/(\d+-\w+-\d{2} \d{2}:\d{2}|\d+-\w+-\d{2} \d{2}:\d{2}:\d{2}\.\d{3})\s+([\d\.]+)/)
+          matches = line.match(/(\d+-\w+-\d{2} \d{2}:\d{2}|\d+-\w+-\d{2} \d{2}:\d{2}:\d{2}\.\d{3})\s+([\d.]+)/)
           {
             time: matches[1],
             longitude: matches[2].to_f

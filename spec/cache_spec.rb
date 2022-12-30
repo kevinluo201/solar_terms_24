@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 require 'fileutils'
 
 RSpec.describe SolarTerms24::Cache do
   let(:filename) { "#{File.expand_path(__dir__)}/2021.json" }
 
   before do
-    stub_const("SolarTerms24::Cache::CACHE_DIR", File.expand_path(__dir__))
+    stub_const('SolarTerms24::Cache::CACHE_DIR', File.expand_path(__dir__))
   end
 
   describe '.has?' do
@@ -23,32 +24,32 @@ RSpec.describe SolarTerms24::Cache do
   describe '.load nad .save' do
     let(:content) do
       <<~HEREDOC
-      {
-        "minor_cold": "2021-01-05 03:23:00.000+00:00",
-        "major_cold": "2021-01-19 20:39:00.000+00:00",
-        "start_of_spring": "2021-02-03 14:58:00.000+00:00",
-        "spring_showers": "2021-02-18 10:43:00.000+00:00",
-        "awakening_of_insects": "2021-03-05 08:53:00.000+00:00",
-        "spring_equinox": "2021-03-23 01:00:00.000+00:00",
-        "pure_brightness": "2021-04-07 01:00:00.000+00:00",
-        "grain_rain": "2021-04-22 01:00:00.000+00:00",
-        "start_of_summer": "2021-05-08 01:00:00.000+00:00",
-        "grain_buds": "2021-05-23 01:00:00.000+00:00",
-        "grain_in_ear": "2021-06-08 01:00:00.000+00:00",
-        "summer_solstice": "2021-06-23 01:00:00.000+00:00",
-        "minor_heat": "2021-07-06 21:05:00.000+00:00",
-        "major_heat": "2021-07-22 14:26:00.000+00:00",
-        "start_of_autumn": "2021-08-07 06:53:00.000+00:00",
-        "end_of_heat": "2021-08-22 21:35:00.000+00:00",
-        "white_dew": "2021-09-07 09:52:00.000+00:00",
-        "autumn_equinox": "2021-09-22 19:21:00.000+00:00",
-        "cold_dew": "2021-10-08 01:39:00.000+00:00",
-        "frost": "2021-10-23 04:51:00.000+00:00",
-        "start_of_winter": "2021-11-07 04:58:00.000+00:00",
-        "minor_snow": "2021-11-22 02:33:00.000+00:00",
-        "major_snow": "2021-12-06 21:57:00.000+00:00",
-        "winter_solstice": "2021-12-21 15:59:00.000+00:00"
-      }
+        {
+          "minor_cold": "2021-01-05 03:23:00.000+00:00",
+          "major_cold": "2021-01-19 20:39:00.000+00:00",
+          "start_of_spring": "2021-02-03 14:58:00.000+00:00",
+          "spring_showers": "2021-02-18 10:43:00.000+00:00",
+          "awakening_of_insects": "2021-03-05 08:53:00.000+00:00",
+          "spring_equinox": "2021-03-23 01:00:00.000+00:00",
+          "pure_brightness": "2021-04-07 01:00:00.000+00:00",
+          "grain_rain": "2021-04-22 01:00:00.000+00:00",
+          "start_of_summer": "2021-05-08 01:00:00.000+00:00",
+          "grain_buds": "2021-05-23 01:00:00.000+00:00",
+          "grain_in_ear": "2021-06-08 01:00:00.000+00:00",
+          "summer_solstice": "2021-06-23 01:00:00.000+00:00",
+          "minor_heat": "2021-07-06 21:05:00.000+00:00",
+          "major_heat": "2021-07-22 14:26:00.000+00:00",
+          "start_of_autumn": "2021-08-07 06:53:00.000+00:00",
+          "end_of_heat": "2021-08-22 21:35:00.000+00:00",
+          "white_dew": "2021-09-07 09:52:00.000+00:00",
+          "autumn_equinox": "2021-09-22 19:21:00.000+00:00",
+          "cold_dew": "2021-10-08 01:39:00.000+00:00",
+          "frost": "2021-10-23 04:51:00.000+00:00",
+          "start_of_winter": "2021-11-07 04:58:00.000+00:00",
+          "minor_snow": "2021-11-22 02:33:00.000+00:00",
+          "major_snow": "2021-12-06 21:57:00.000+00:00",
+          "winter_solstice": "2021-12-21 15:59:00.000+00:00"
+        }
       HEREDOC
     end
 

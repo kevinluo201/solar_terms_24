@@ -3,6 +3,7 @@
 require 'tzinfo'
 
 module SolarTerms24
+  # :nodoc:
   class SolarTerms
     attr_accessor :year, :timezone, :lang
     attr_reader :solar_terms

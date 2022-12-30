@@ -6,6 +6,7 @@ require 'tzinfo'
 I18n.load_path += Dir["#{File.dirname(__FILE__)}/locales/*.yml"]
 
 module SolarTerms24
+  # :nodoc:
   class SolarTerm
     attr_accessor :solar_term_key, :timezone, :lang
     attr_reader :time
