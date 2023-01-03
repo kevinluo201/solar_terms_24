@@ -4,21 +4,24 @@
 
 ## Introduction
 
-`solar_terms_24` calculates and collects 24 solar terms each year. It utilizes [NASA's JPL Horizons System API](https://ssd.jpl.nasa.gov/horizons/) to calculate the longitude of ecliptic data. Those solar terms’ times can be translated into different **timezone** or **languages**.
+`solar_terms_24` calculates and collects 24 solar terms times of each year. It utilizes [NASA's JPL Horizons System API](https://ssd.jpl.nasa.gov/horizons/) to calculate the longitude of ecliptic data. Those solar terms’ times can be translated into different **timezone** or **languages**. This gem is inspired by a Python package, [solarterms](https://github.com/kumkee/solarterms)
 
-[Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) play an important role in calendars. For example, for lunisolar calendars like Chinese calendar, it is used to decide the [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping)). In addition, let’s see the definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox, the **spring equinox** is also a solar term so it can also be used to decide Easter day.
+[Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) play an important role in calendars. Some examples are,
+* For lunisolar calendars like Chinese calendar, it is used to decide the [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping))
+* Eater Day's date depends on a solar term. The definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox**, the **spring equinox** is a solar term.
+* 12 Zodiacs like, Leo, Cancer, etc. are also decided by solar terms(ref: [[wiki](https://en.wikipedia.org/wiki/Zodiac)])
 
 This gem aims to solve 2 main problems while finding those solar terms times of each year:
 
-### 1. Ecliptic time
+### 1. Uncertain times of solar terms
 
-The times of solar terms are decided by **the longitude of the earth on the ecliptic**, which changes every year. [NASA's JPL Horizons System API](https://ssd.jpl.nasa.gov/horizons/) provides accurate ecliptic data so this gem can precisely calculate the solar terms time.  This gem already caches 1900-2100's data. I bet this should be enough; however, you can try to search any year and it will call API to do the calculation.
+The times of solar terms are decided by **the longitude of the earth on the ecliptic**, which changes every year. [NASA's JPL Horizons System API](https://ssd.jpl.nasa.gov/horizons/) provides accurate ecliptic data so this gem can precisely calculate the solar terms time.  This gem already caches **1900-2100**'s data. It should be enough in normal cases; however, you can try to search any year and it will call API to do the calculation.
+
+![The-relationship-between-24-solar-terms-and-Earths-position-in-its-orbit-during-a](https://user-images.githubusercontent.com/1151907/210419143-1c435ba1-7974-4b72-8c48-8cf74da36c0b.png)[image source](https://www.researchgate.net/publication/356917267_Study_on_24_Jieling_Drums_as_Urban_Cultural_Landscape_in_Malaysia)
 
 ### 2. Timezone
 
 The time of solar terms is different in different countries because of different timezones. You can specify the timezones and languages to address this internationalization issue.
-
-This gem is inspired by a Python package [solarterms](https://github.com/kumkee/solarterms)
 
 ## Installation
 
