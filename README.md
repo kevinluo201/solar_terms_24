@@ -8,7 +8,7 @@
 
 [Solar term](https://en.wikipedia.org/wiki/Solar_term)(節氣, 節気, 节气,  절기, Tiết khí) play an important role in calendars. Some examples are,
 * For lunisolar calendars like Chinese calendar, it is used to decide the [intercalary months](https://en.wikipedia.org/wiki/Intercalation_(timekeeping))
-* Eater Day's date depends on a solar term. The definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox**, the **spring equinox** is a solar term.
+* Easter Day's date depends on a solar term. The definition of Easter day, **the first Sunday after the full Moon that occurs on or after the spring equinox**, the **spring equinox** is a solar term.
 * 12 Zodiacs like, Leo, Cancer, etc. are also decided by solar terms(ref: [[wiki](https://en.wikipedia.org/wiki/Zodiac)])
 
 This gem aims to solve 2 main problems while finding those solar terms times of each year:
