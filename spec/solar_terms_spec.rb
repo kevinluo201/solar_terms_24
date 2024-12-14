@@ -193,5 +193,19 @@ RSpec.describe SolarTerms24::SolarTerms do
       expect(dates[22]).to eq(Date.new(2022, 12, 7))
       expect(dates[23]).to eq(Date.new(2022, 12, 21))
     end
+
+    (1900..2100).each do |year|
+      SolarTerms24::Horizons::SOLAR_TERMS.each do |solar_term_key, expectations|
+        solar_terms_year = described_class.new(year)
+        expected_month = expectations[:month]
+        expected_day_min = expectations[:days].min
+        expected_day_max = expectations[:days].max
+        it "#{year} #{solar_term_key} should fall between #{expected_month}/#{expected_day_min}..#{expected_day_max}" do
+          expect(solar_terms_year.public_send(solar_term_key).date.year).to eq(year)
+          expect(solar_terms_year.public_send(solar_term_key).date.month).to eq(expected_month)
+          expect(solar_terms_year.public_send(solar_term_key).date.day).to be_between(expected_day_min, expected_day_max)
+        end
+      end
+    end
   end
 end
